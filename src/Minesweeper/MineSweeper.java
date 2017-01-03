@@ -88,7 +88,7 @@ class MineSweeper {
 
         if (!cell.getHasBeenPicked()) {
             cell.setHasBeenPicked(true);
-            cell.setValue(Integer.toString(numMinesAdjecent(row, col)));
+            cell.setValue(Integer.toString(numMinesAdjacent(row, col)));
             ++this.cellsPicked;
         }
 
@@ -151,29 +151,29 @@ class MineSweeper {
 
     /**
      * Calculates the number of mines adjacent the cell at the given indices
-     * @param row
-     * @param col
+     * @param row row index
+     * @param col col index
      * @return the number of mines adjacent the cell at the given indices
      */
-    private int numMinesAdjecent(int row, int col) {
-        int numMinesAdjecent = 0;
+    private int numMinesAdjacent(int row, int col) {
+        int numMinesAdjacent = 0;
 
-        int adjacentRow, adjecentCol;
-        for (int[] adjecencyMap : adjacencyMappings) {
-            adjacentRow = row + adjecencyMap[0];
-            adjecentCol = col + adjecencyMap[1];
+        int adjacentRow, adjacentCol;
+        for (int[] adjacencyMap : adjacencyMappings) {
+            adjacentRow = row + adjacencyMap[0];
+            adjacentCol = col + adjacencyMap[1];
 
             try {
-                Cell cell = getCell(adjacentRow, adjecentCol);
+                Cell cell = getCell(adjacentRow, adjacentCol);
                 if (cell.getIsBomb()) {
-                    ++numMinesAdjecent;
+                    ++numMinesAdjacent;
                 }
             } catch (IndexOutOfBoundsException e) {
                 // some adjacent cells wont exist and will throw exceptions
             }
         }
 
-        return numMinesAdjecent;
+        return numMinesAdjacent;
     }
 
     /**
